@@ -106,6 +106,12 @@ o bien ejecutar sin el ampersand y presionar ctrl-z y luego el comando bg para p
 
 Este inicia en el puerto por defecto 8080
 
+Deje un comando para ahorrarse de escribir y ejecutar en foreground
+
+```
+./runApp
+```
+
 
 # JUNIT 5 Tests.
 
@@ -115,7 +121,16 @@ En la carpeta raiz del proyecto, ejecutar:
 ./gradlew cleanTest test
 ```
 
-### Ejecucion mediante curl, mejor con Postman para ver la salida 
+o bien usar el comando en la carpeta raiz:
+
+```
+./testApp
+```
+
+Este ultimo filtra por la palabra TEST-APP para limpiar la salida
+
+### Ejecucion de api mediante comandos curl
+
 Luego, en la carpeta raiz del proyecto existe una carpeta denominada curls/
 
 ```
