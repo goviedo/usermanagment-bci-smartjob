@@ -1,0 +1,7 @@
+#!/bin/bash
+curl -v -XPOST -H "Content-type: application/json" -d '{ 
+  "name": "Gonzalo Oviedo",
+  "email": "gonzalo.oviedo.lambert@gmail.com",
+  "password": "Pantoesico%",
+  "phones": []
+}' 'http://localhost:8080/user/sign-up'
