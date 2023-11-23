@@ -158,6 +158,12 @@ Los siguientes ejecutables realizan:
 
 Este archivo son direcciones URLs que me han servido de referencia para el proyecto.
 
+# Nota Swagger
+
+Por motivos de tiempo y lo expreso en el correo, dado que la prueba fue entregada recien hoy en la tarde, no he podido implementar Swagger.
+Mañana tengo un paseo por todo el día con mi hijo y pasado mañana me voy a Concepción.
+Si me dan un tiempo para el lunes, puedo entregarles con Swagger.
+
 # Reference Documentation
 For further reference, please consider the following sections:
 
