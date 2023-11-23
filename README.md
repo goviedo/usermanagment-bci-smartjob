@@ -36,7 +36,7 @@ Dependencias instaladas
 Se puede descargar del siguiente sitio público y con el siguiente comando:
 
 ```
-git clone https://github.com/goviedo/usermanagment-globallogic.git
+git clone https://github.com/goviedo/usermanagment-bci-smartjob.git
 ```
 
 # Java versión
@@ -64,7 +64,12 @@ path=('/opt/java/jdk1.8.0_202/bin' $path)
 
 # Entering h2 console
 
+Si se desea investigar los datos en la bd h2, pueden seguir la ruta siguiente y la deficion de usuario y password dado por el archivo application.properties
+
+**Utiliza h2 en memoria**, por lo que cada vez que se arranque spring, reiniciará todos los datos.
+
 * http://localhost:8080/h2
+* usario/password: sa/password
 
 ## Version h2 sin problemas
 
@@ -97,12 +102,12 @@ Primero, en la carpeta raiz del proyecto, iniciarlo:
 ./gradlew bootRun &
 ```
 
-o bien ejecutar sin el ampersnad y presionar ctrl-z y luego el comando bg para pasar el proceso a background.
+o bien ejecutar sin el ampersand y presionar ctrl-z y luego el comando bg para pasar el proceso a background.
 
 Este inicia en el puerto por defecto 8080
 
 
-### JUNIT 5 Tests.
+# JUNIT 5 Tests.
 
 En la carpeta raiz del proyecto, ejecutar:
 
@@ -119,19 +124,20 @@ cd ./curls/
 
 Los siguientes ejecutables realizan:
 
-* curl-sign-up : Una ejecucion normal del endpoint, ingresando el usuario y un telefono. Si se ejecuta de nuevo, saldra el error que el usuario ya existe. CONFLICT, 409.
+* curl-sign-up : Una ejecucion normal del endpoint, ingresando el usuario y un telefono. Si se ejecuta de nuevo, saldra el error que el usuario ya existe, en este caso el correo ya existe ya que es único. CONFLICT, 409.
   * Aqui podemos ver el UUID que se genera automáticamente.
   * Si se edita el archivo y se cambia el correo, se puede ver como se genera un UUID nuevo.
   * Con lo anterior podemos ver como son creados los campos created y lastLogin con timestamp.
   * El token, también es autogenerado dependiendo del password que usemos, este token cambia.
-  * isActive es representado por la herencia de UserDetailService de Spring Security con campos como accountNonExpired, accountNonLocked, credentialsNonExpired y enable que seria como el isActive
-
-* curl-sign-up-password-erroneo: La clave no tiene el formato esperado. BAD REQUEST. 400. 
+  * isActive es representado por la herencia de UserDetailService de Spring Security con campos como accountNonExpired, accountNonLocked, credentialsNonExpired y enable que seria el equivalente a isActive.
 
 * curl-sign-up-correo-incorrecto: El correo es incorrecto. BAD REQUEST. 400.
 
+* curl-sign-up-clave-o-password-erroneo: La clave no tiene el formato esperado. BAD REQUEST. 400. Este sigue la expresión regular definida en application.properties. Mas información por favor ver clase cl.goviedo.usermanagment.validators.CustomPasswordValidatorImpl.java sobre el regex usado.
+
 * curl-sign-up-nombre-telefono-opcionales: Sin la opcion de ingresar telefono alguno. Se ingresa correctamente. ACCEPTED. 200 OK.
 
+* curl-sign-up-password-erroneo-y-email-incorrecto: Esto representa que es posible visualizar 2 errores ya que se van agregando a la salida, tanto del password incorrecto como el correo.
 
 ### HELP.md
 
