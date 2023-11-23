@@ -101,7 +101,7 @@ class UsermanagmentApplicationTestsRestTemplate {
 	        assertEquals(400, result.getStatusCodeValue());       
 	}
 
-	@DisplayName("TEST-APP: Token al Crear un Usuario")
+	@DisplayName("TEST-APP: Token al Crear un Usuario. 200 OK")
 	@Test
 	public void token() throws Exception {
 		  final String baseUrl = "http://localhost:"+randomServerPort+"/user/sign-up/";
@@ -116,5 +116,73 @@ class UsermanagmentApplicationTestsRestTemplate {
 	        ResponseEntity<String> result = this.restTemplate.postForEntity(uri, request, String.class);
 
 	        assert(result.getBody().toString().contains("token"));       
+	}
+
+	@DisplayName("TEST-APP: Correo goviedo@com.edu es valido. 200 OK")
+	@Test
+	public void correoEdu() throws Exception {
+		  final String baseUrl = "http://localhost:"+randomServerPort+"/user/sign-up/";
+	        URI uri = new URI(baseUrl);
+	        PhoneEntity fono = PhoneEntity.builder().cityCode(45).contryCode("CL").number(56963723603L).build();
+			List<PhoneEntity> fonos = new ArrayList<PhoneEntity>();
+			fonos.add(fono);
+			UserEntity usuario = UserEntity.builder().name("ValidaCorreoEdu").password("CorreoEdu$").email("goviedo@com.edu")
+					.phones(fonos).build();      
+	        HttpHeaders headers = new HttpHeaders();	 
+	        HttpEntity<UserEntity> request = new HttpEntity<>(usuario, headers);         
+	        ResponseEntity<String> result = this.restTemplate.postForEntity(uri, request, String.class);
+
+	        assertEquals(200, result.getStatusCodeValue());       
+	}
+
+	@DisplayName("TEST-APP: Correo g.oviedo.lambert@gmail.com no esta permitido 400 BAD REQUEST")
+	@Test
+	public void correoGmailConPuntos() throws Exception {
+		  final String baseUrl = "http://localhost:"+randomServerPort+"/user/sign-up/";
+	        URI uri = new URI(baseUrl);
+	        PhoneEntity fono = PhoneEntity.builder().cityCode(45).contryCode("CL").number(56963723603L).build();
+			List<PhoneEntity> fonos = new ArrayList<PhoneEntity>();
+			fonos.add(fono);
+			UserEntity usuario = UserEntity.builder().name("OtroCorreoGmailClasico").password("Correo4Edu$").email("g.oviedo.lambert@gmail.com")
+					.phones(fonos).build();      
+	        HttpHeaders headers = new HttpHeaders();	 
+	        HttpEntity<UserEntity> request = new HttpEntity<>(usuario, headers);         
+	        ResponseEntity<String> result = this.restTemplate.postForEntity(uri, request, String.class);
+
+	        assertEquals(400, result.getStatusCodeValue());       
+	}
+
+	@DisplayName("TEST-APP: Correo francisca@ubb.cl debiera ser correcto 200 OK")
+	@Test
+	public void correoDominioUbb() throws Exception {
+		  final String baseUrl = "http://localhost:"+randomServerPort+"/user/sign-up/";
+	        URI uri = new URI(baseUrl);
+	        PhoneEntity fono = PhoneEntity.builder().cityCode(45).contryCode("CL").number(56963723603L).build();
+			List<PhoneEntity> fonos = new ArrayList<PhoneEntity>();
+			fonos.add(fono);
+			UserEntity usuario = UserEntity.builder().name("CorreoDominioUbb").password("Colgator$").email("francisca@ubb.cl")
+					.phones(fonos).build();      
+	        HttpHeaders headers = new HttpHeaders();	 
+	        HttpEntity<UserEntity> request = new HttpEntity<>(usuario, headers);         
+	        ResponseEntity<String> result = this.restTemplate.postForEntity(uri, request, String.class);
+			System.out.println(result.getBody().toString());
+	        assertEquals(200, result.getStatusCodeValue());       
+	}
+
+	@DisplayName("TEST-APP: Correo incorrecto@hola debiera ser incorrecto 400 BAD Request")
+	@Test
+	public void correoIncorrecto() throws Exception {
+		  final String baseUrl = "http://localhost:"+randomServerPort+"/user/sign-up/";
+	        URI uri = new URI(baseUrl);
+	        PhoneEntity fono = PhoneEntity.builder().cityCode(45).contryCode("CL").number(56963723603L).build();
+			List<PhoneEntity> fonos = new ArrayList<PhoneEntity>();
+			fonos.add(fono);
+			UserEntity usuario = UserEntity.builder().name("CorreoIncorrecto").password("Correo4Edu$").email("incorrecto@hola")
+					.phones(fonos).build();      
+	        HttpHeaders headers = new HttpHeaders();	 
+	        HttpEntity<UserEntity> request = new HttpEntity<>(usuario, headers);         
+	        ResponseEntity<String> result = this.restTemplate.postForEntity(uri, request, String.class);
+
+	        assertEquals(400, result.getStatusCodeValue());       
 	}
 }

@@ -14,8 +14,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-import javax.validation.constraints.Email;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -25,6 +23,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import cl.goviedo.usermanagment.validators.CustomPasswordValidator;
+import cl.goviedo.usermanagment.validators.CustomEmailRegexValidator;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -45,7 +44,7 @@ public class UserEntity implements UserDetails {
     @Type(type = "org.hibernate.type.UUIDCharType")
     private UUID id;
     private String name;
-    @Email(regexp = ".+@.+\\..+",message = "Email es incorrecto")
+    @CustomEmailRegexValidator
     @Column(unique=true)
     private String email;
     @CustomPasswordValidator

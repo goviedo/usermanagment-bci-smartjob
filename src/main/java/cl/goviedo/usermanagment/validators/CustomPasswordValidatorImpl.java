@@ -31,7 +31,7 @@ class CustomPasswordValidatorImpl implements ConstraintValidator<CustomPasswordV
 
     @Override
     public boolean isValid(String value, ConstraintValidatorContext context) {
-        log.info("El regex que recibo es: "+regex);
+        log.info("PASSWORD REGEX: "+regex);
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(value);
         return matcher.find();
