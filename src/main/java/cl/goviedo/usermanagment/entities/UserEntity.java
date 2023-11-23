@@ -57,8 +57,7 @@ public class UserEntity implements UserDetails {
     @OneToMany
     @JoinColumn(name="user_id")
     private List<PhoneEntity> phones = new ArrayList<>();
-    
-    @Transient
+	@Column(columnDefinition="text")
     private String token;
 
     public void setPhone(PhoneEntity phone) {
