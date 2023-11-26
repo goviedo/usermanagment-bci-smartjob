@@ -8,7 +8,7 @@ Quedo atento!. Muchas gracias por su tiempo y paciencia.
 
 # Resumen de ejecuciones
 
-**Acceso consola h2
+**Acceso consola h2**
 
 * http://localhost:8080/h2
 * usario/password: sa/password
@@ -37,7 +37,7 @@ o bien usar el comando en la carpeta raiz:
 ./testApp
 ```
 
-**Swagger 2
+**Swagger 2**
 
 ```
 http://localhost:8080/swagger-ui.html
