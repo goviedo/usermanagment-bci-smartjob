@@ -6,6 +6,43 @@ Les solicito visualizar el código, ver el uso de anotaciones, las configuracion
 
 Quedo atento!. Muchas gracias por su tiempo y paciencia.
 
+# Resumen de ejecuciones
+
+**Acceso consola h2
+
+* http://localhost:8080/h2
+* usario/password: sa/password
+
+**Ejecución**
+
+```
+./gradlew bootRun &
+```
+
+o bien el programa linea de comandos
+
+```
+./runApp
+```
+
+**Test**
+
+```
+./gradlew cleanTest test
+```
+
+o bien usar el comando en la carpeta raiz:
+
+```
+./testApp
+```
+
+**Swagger 2
+
+```
+http://localhost:8080/swagger-ui.html
+```
+
 # Diagramas
 
 Los diagramas se encuentra en la carpeta diagramas/ del proyecto raiz.
@@ -85,12 +122,7 @@ Explicacion aqui: https://stackoverflow.com/questions/68365221/h2-spring-boot-jp
 
 # User and Password Spring Security
 
-En el archivo application.properties:
-
-```
-user: admin
-password: admin
-```
+Clase de configuracion se permite todas las peticiones http
 
 ## Como iniciar el proyecto
 
@@ -158,11 +190,13 @@ Los siguientes ejecutables realizan:
 
 Este archivo son direcciones URLs que me han servido de referencia para el proyecto.
 
-# Nota Swagger
+# Swagger
 
-Por motivos de tiempo y lo expreso en el correo, dado que la prueba fue entregada recien hoy en la tarde, no he podido implementar Swagger.
-Mañana tengo un paseo por todo el día con mi hijo y pasado mañana me voy a Concepción.
-Si me dan un tiempo para el lunes, puedo entregarles con Swagger.
+Ejecutar en un browser una vez ejecutado el servicio:
+
+```
+http://localhost:8080/swagger-ui.html
+```
 
 # Reference Documentation
 For further reference, please consider the following sections:

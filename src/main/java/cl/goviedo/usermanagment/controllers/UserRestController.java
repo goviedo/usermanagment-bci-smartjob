@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import cl.goviedo.usermanagment.entities.UserEntity;
 import cl.goviedo.usermanagment.services.JwtUtil;
 import cl.goviedo.usermanagment.services.UserService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,7 +27,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 @RequestMapping(path = "user",
         produces = MediaType.APPLICATION_JSON_VALUE,
         consumes = MediaType.APPLICATION_JSON_VALUE,
-        method = {RequestMethod.GET, RequestMethod.POST})
+        method = {RequestMethod.POST})
+@Api(value = "API Usuarios", description = "API para la gestion de usuarios")
 public class UserRestController {
     UserService us;
     JwtUtil jwtUtil;
@@ -39,6 +42,7 @@ public class UserRestController {
 
 	@CrossOrigin
 	@PostMapping(path = "/sign-up")
+    @ApiOperation(value = "Crea un nuevo usuario", response = ResponseEntity.class)
 	public ResponseEntity<Object> signUp(@Valid @RequestBody UserEntity user) throws Exception {
 
         UserEntity userToken = us.signUp(user);

@@ -28,11 +28,17 @@ public class ProjectSecurityConfig {
     
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        //http.authorizeHttpRequests().anyRequest().permitAll();
-        http.authorizeRequests(requests -> requests
+        http.authorizeHttpRequests().anyRequest().permitAll();
+        /*http.authorizeRequests(requests -> requests
                 .antMatchers("/user/**").permitAll()
+                .antMatchers("/v2/api-docs",
+                                   "/configuration/ui",
+                                   "/swagger-resources/**",
+                                   "/configuration/security",
+                                   "/swagger-ui.html",
+                                   "/webjars/**").permitAll()
                 .antMatchers("/h2/**").permitAll()
-                .anyRequest().authenticated()).sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .anyRequest().authenticated()).sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));*/
 
         http.csrf(csrf -> csrf.disable());
         http.headers(headers -> headers.frameOptions().disable());
